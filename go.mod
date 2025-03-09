@@ -1,4 +1,4 @@
-module gobmp
+module bmpnurse
 
 go 1.21.0
 

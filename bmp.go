@@ -74,14 +74,21 @@ type BmpHeader struct {
 
 // BmpReport provide base info about bmp image
 type BmpReport struct {
-	BfType         string
+	// bmp protocol version
+	BfType string
+
+	// headers type
 	DibHeadersType string
 	ByteOrder      string
-	BitsPerPixel   int16
-	HaveHeader     bool
-	HaveValidSize  bool
-	DeclaredSize   int32
-	ExpectedSize   int32
+
+	// how many bits per pixel is
+	BitsPerPixel int16
+	HaveHeader   bool
+
+	// flag is true when DeclaredSize == ActualSize
+	HaveValidSize bool
+	DeclaredSize  int32
+	ActualSize    int32
 }
 
 // InspectBmpImage is user to inspect received .bmp file
@@ -126,10 +133,10 @@ func InspectBmpImage(rawData []byte) (report BmpReport, err error) {
 
 	report.HaveValidSize = false
 	report.DeclaredSize = bmpHeader.bfSizeBytes
-	report.ExpectedSize = dataSize
+	report.ActualSize = dataSize
 
 	// compare actual and expected image size (in bytes)
-	if bmpHeader.bfSizeBytes != 0 && report.ExpectedSize == bmpHeader.bfSizeBytes {
+	if bmpHeader.bfSizeBytes != 0 && report.ActualSize == report.DeclaredSize {
 		report.HaveValidSize = true
 	}
 
