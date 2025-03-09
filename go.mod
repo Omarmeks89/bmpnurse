@@ -1,4 +1,4 @@
-module bmpnurse
+module github.com/Omarmeks89/bmpnurse
 
 go 1.21.0
 
