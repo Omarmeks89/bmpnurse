@@ -47,7 +47,7 @@ func PrintBmpByteOrder(fName string) error {
 	fmt.Printf("'%v'\n", report.ByteOrder)	
 }
 ```
-as result:
+as result we got:
 ```bash
 'little-endian'
 ```
